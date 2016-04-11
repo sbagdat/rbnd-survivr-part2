@@ -30,6 +30,7 @@ class Jury
     max_vote = final_votes.values.max
     final_votes.each_key do |finalist|
       if final_votes[finalist] == max_vote
+        puts "THE CHAMPION IS #{finalist.name.upcase}"
         return finalist
       end
     end
