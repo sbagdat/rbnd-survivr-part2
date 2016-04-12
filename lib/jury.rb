@@ -27,12 +27,8 @@ class Jury
   end
 
   def announce_winner(final_votes)
-    max_vote = final_votes.values.max
-    final_votes.each_key do |finalist|
-      if final_votes[finalist] == max_vote
-        puts "THE CHAMPION IS #{finalist.name.upcase}"
-        return finalist
-      end
-    end
+    winner = final_votes.max_by{|key, value| final_votes[key]}[0]
+    puts "THE CHAMPION IS #{winner.name.upcase}"
+    winner
   end
 end

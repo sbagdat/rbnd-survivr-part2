@@ -21,36 +21,25 @@ require_relative "jury"
 
 #This is where you will write your code for the three phases
 def phase_one
-  puts "Phase One"
-  eliminated_contestants = []
+  puts "***PHASE ONE***".green
   8.times do
-    loser_tribe_order = 1
-    loser_tribe_order = 0 if @borneo.immunity_challenge == @borneo.tribes.first
-    losers = @borneo.tribes[loser_tribe_order].members
-    immune = @borneo.individual_immunity_challenge
-    eliminated = @borneo.tribes[loser_tribe_order].tribal_council(immune: immune)
-    @borneo.tribes[loser_tribe_order].members.delete(eliminated)
-    eliminated_contestants << eliminated
-    @borneo.tribes[loser_tribe_order].members.delete(eliminated)
-    puts "Loser tribe of this turn is #{@borneo.tribes[loser_tribe_order].name} and eliminated contestant is #{eliminated}."
+    eliminated = @borneo.tribes[(@borneo.immunity_challenge == @borneo.tribes.first) ? 0 : 1].tribal_council
+    puts "Eliminated contestant of this turn is #{eliminated}."
   end
 end
 
 def phase_two
-  puts "Phase Two"
+  puts "***PHASE TWO***".green
   3.times do
-    immune = @borneo.individual_immunity_challenge
-    eliminated = @borneo.tribes.first.tribal_council(immune: immune)
-    @borneo.tribes.first.members.delete(eliminated)
+    eliminated = @borneo.tribes[0].tribal_council(immune: @borneo.individual_immunity_challenge)
     puts "Eliminated contestant of this turn is #{eliminated}."
   end
 end
 
 def phase_three
-  puts "Phase Three"
+  puts "***PHASE THREE***".green
   7.times do
-    immune = @borneo.individual_immunity_challenge
-    eliminated = @borneo.tribes.first.tribal_council(immune: immune)
+    eliminated = @borneo.tribes[0].tribal_council(immune: @borneo.individual_immunity_challenge)
     @jury.add_member(eliminated)
     puts "#{eliminated} is eliminated and became a jury now."
   end

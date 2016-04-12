@@ -12,8 +12,7 @@ class Tribe
   end
 
   def tribal_council(options = {})
-    member = @members.pop
-    member if options[:immune] != member
+    @members.delete(@members.reject {|m| options[:immune] && m == options[:immune] }.sample)
   end
 
   def print_tribe
